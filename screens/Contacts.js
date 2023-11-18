@@ -2,40 +2,40 @@ import React,{useState, useEffect} from 'react';
 import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
 import { fetchContacts } from '../utils/api';
 import ContactListItem from '../components/ContactListItem';
+import { fetchContactsLoading,fetchContactsSuccess,fetchContactsError } from '../src/store';
+import { useDispatch,useSelector } from 'react-redux';
 const keyExtractor = ({ phone }) => phone;
-const Contacts = ()=>
+const Contacts = ({navigation})=>
 {
     //state
-    const [contacts, setContacts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    //Load du lieu
+    const {contacts,loading,error} = useSelector((state) =>state); 
+    const dispatch = useDispatch();
+//Load du lieu 
     useEffect(()=>{
+        dispatch(fetchContactsLoading()); 
         fetchContacts()
         .then(
             contacts=> {
-                setContacts(contacts);
-                setLoading(false);
-                setError(false);
+            dispatch(fetchContactsSuccess(contacts));
             }
         )
         .catch(
             e=>{
-                console.log(e);
-                setLoading(false);
-                setError(true); 
+            dispatch(fetchContactsError());
             }
         )
     },[])
     //sort
-    const contactsSorted = contacts.sort((a, b) =>a.name.localeCompare(b.name));
+    const contactsSorted = contacts.slice().sort((a, b) => a.name.localeCompare(b.name));
+    //sort
+ 
     const renderContact = ({item }) => {
         const { name, avatar, phone } = item;
         return <ContactListItem
                     name={name} 
                     avatar={avatar} 
                     phone={phone} 
-                    onPress={()=>{}}
+                    onPress={()=>navigation.navigate("Profile",{contact: item})}
                 />;
     };
     //Render

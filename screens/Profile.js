@@ -4,16 +4,18 @@ import { fetchRandomContact } from '../utils/api';
 import ContactThumbnail from '../components/ContactThumbnail';
 import DetailListItem from '../components/DetailListItem';
 import colors from '../utils/colors';
-const Profile =()=>
+const Profile =({route})=>
 {
-    const [contact, setContact] = useState({});
-    useEffect(()=>
-        {
-            fetchRandomContact().then(
-                contact => setContact(contact)
-            )
-        }
-    ,[]);
+    
+    // const [contact, setContact] = useState({});
+    // useEffect(()=>
+    //     {
+    //         fetchRandomContact().then(
+    //             contact => setContact(contact)
+    //         )
+    //     }
+    // ,[]);
+    const {contact} =route.params;
     const {avatar, name, email, phone, cell}= contact;
     return (
         <View style={styles.container}>

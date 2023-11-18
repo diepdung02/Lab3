@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 4,
   },
-});
+})
