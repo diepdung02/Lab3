@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "37129094454",
+    "project_id": "lab3-cea9f",
+    "storage_bucket": "lab3-cea9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37129094454:android:0d6085935715002b3d1f97",
+        "android_client_info": {
+          "package_name": "com.lap3.lap3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBuJ0MUg0a3pv68JOrgEaw2os9Ei6-0_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
