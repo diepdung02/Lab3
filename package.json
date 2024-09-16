@@ -12,7 +12,9 @@
     "@expo/vector-icons": "13.0.0",
     "@expo/webpack-config": "^19.0.0",
     "@react-native-async-storage/async-storage": "^1.18.2",
+    "@react-native-community/checkbox": "^0.5.17",
     "@react-native-firebase/auth": "^20.5.0",
+    "@react-native-firebase/firestore": "^20.5.0",
     "@react-navigation/drawer": "^6.6.4",
     "@react-navigation/material-bottom-tabs": "^6.2.17",
     "@react-navigation/native": "^6.1.8",
@@ -22,6 +24,7 @@
     "expo": "~49.0.11",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.13.1",
+    "formik": "^2.4.6",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.72.10",
@@ -35,7 +38,8 @@
     "react-native-web": "^0.19.9",
     "react-redux": "^8.1.2",
     "uuid": "^9.0.1",
-    "yet": "^0.1.0"
+    "yet": "^0.1.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

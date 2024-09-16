@@ -1,4 +1,3 @@
-// LoginScreen.js
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -18,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
         const user = userCredential.user;
         Alert.alert("Đăng nhập thành công!", `Xin chào, ${user.email}`);
         setLoading(false);
-        navigation.navigate('Home'); // Chuyển đến màn hình chính
+        // navigation.navigate('Home'); // Chuyển đến màn hình chính
       })
       .catch((error) => {
         setLoading(false);
