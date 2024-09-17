@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { auth } from '../firebaseConfig';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const RegisterScreen = ({ navigation }) => {
@@ -37,10 +37,30 @@ const RegisterScreen = ({ navigation }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         Alert.alert("Người dùng đã đăng ký thành công", user.email);
-        navigation.navigate('Login'); // Thay 'Login' bằng tên màn hình bạn muốn chuyển đến
+
+        // Đăng xuất sau khi đăng ký thành công
+        auth.signOut();
+
+        // Điều hướng về màn hình đăng nhập
+        navigation.navigate('Login');
       })
       .catch((error) => {
         Alert.alert("Đăng ký không thành công", error.message);
+      });
+  };
+
+  const handleForgotPassword = () => {
+    if (!email) {
+      Alert.alert("Vui lòng nhập email của bạn để đặt lại mật khẩu!");
+      return;
+    }
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Alert.alert("Email đặt lại mật khẩu đã được gửi!", "Vui lòng kiểm tra email của bạn.");
+      })
+      .catch((error) => {
+        Alert.alert("Đã xảy ra lỗi", error.message);
       });
   };
 
@@ -97,6 +117,10 @@ const RegisterScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleForgotPassword}>
+        <Text style={styles.forgotPasswordText}>Quên mật khẩu?</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -139,10 +163,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
     backgroundColor: '#fff',
-    paddingRight: 10, // Thêm khoảng cách để icon không chồng lên TextInput
+    paddingRight: 10,
   },
   icon: {
-    paddingHorizontal: 10, // Tạo khoảng cách cho icon
+    paddingHorizontal: 10,
   },
   button: {
     backgroundColor: '#4CAF50',
@@ -154,6 +178,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '500',
+  },
+  forgotPasswordText: {
+    color: '#4CAF50',
+    textAlign: 'center',
+    marginTop: 15,
+    textDecorationLine: 'underline',
   },
 });
 
